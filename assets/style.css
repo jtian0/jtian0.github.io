@@ -1,0 +1,877 @@
+/* ==========================================================================
+   Jiannan Tian's Page
+   ========================================================================== */
+
+:root {
+  /* the banner bar. These are the ONLY per-site part of the banner: the rules in
+     the header block below are identical across the sites that share it. */
+  --bar: #242424;
+  --bar-fg: #ffffff;
+  --bar-idx: rgba(255, 255, 255, .62);
+  --bar-rule: rgba(255, 255, 255, .3);
+  --bar-hover: rgba(255, 255, 255, .14);
+  --bar-current-bg: var(--bg);
+  --bar-current-fg: var(--fg);
+  --bar-current-idx: var(--muted);
+  --bar-mark-filter: invert(1);
+  --bg: #ffffff;
+  --surface: #fafafa;
+  --surface-2: #f0f0f0;
+  --fg: #242424;          /* not pure black: 15.5:1 on white reads as ink, 21:1 reads as glare */
+  --fg-soft: #454545;
+  --muted: #6e6e6e;
+  --rule: #e4e4e4;
+  --rule-strong: #c9c9c9;
+  --accent: #242424;
+  --accent-fg: #ffffff;
+  --accent-soft: #f2f2f2;
+  --accent-line: #242424;
+
+  --prose: 800px;
+  --wide: 800px;     /* the column; the banner tracks it, so both scale together */
+
+  --radius: 10px;
+  --radius-sm: 6px;
+
+  --shadow: 0 1px 2px rgba(0, 0, 0, .06), 0 6px 20px -12px rgba(0, 0, 0, .28);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bar-current-fg: var(--fg);
+    /* dark mode flips the bar with the page: a black bar on a black page is
+       not a bar. The seal is dark line art, so on a white bar it stops
+       inverting. */
+    --bar: #f2f2f2;
+    --bar-fg: #121212;
+    --bar-idx: rgba(0, 0, 0, .62);
+    --bar-rule: rgba(0, 0, 0, .28);
+    --bar-hover: rgba(0, 0, 0, .10);
+    --bar-mark-filter: none;
+    --bg: #121212;
+    --surface: #1b1b1b;
+    --surface-2: #242424;
+    --fg: #f2f2f2;
+    --fg-soft: #c9c9c9;
+    --muted: #8a8a8a;
+    --rule: #232323;
+    --rule-strong: #3a3a3a;
+    --accent: #ededed;
+    --accent-fg: #000000;
+    --accent-soft: #1a1a1a;
+    --accent-line: #ededed;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .6), 0 8px 24px -14px rgba(0, 0, 0, .9);
+  }
+}
+
+  :root[data-theme="dark"] {
+    --bar-current-fg: var(--fg);
+    /* dark mode flips the bar with the page: a black bar on a black page is
+       not a bar. The seal is dark line art, so on a white bar it stops
+       inverting. */
+    --bar: #f2f2f2;
+    --bar-fg: #121212;
+    --bar-idx: rgba(0, 0, 0, .62);
+    --bar-rule: rgba(0, 0, 0, .28);
+    --bar-hover: rgba(0, 0, 0, .10);
+    --bar-mark-filter: none;
+    --bg: #121212;
+    --surface: #1b1b1b;
+    --surface-2: #242424;
+    --fg: #f2f2f2;
+    --fg-soft: #c9c9c9;
+    --muted: #8a8a8a;
+    --rule: #232323;
+    --rule-strong: #3a3a3a;
+    --accent: #ededed;
+    --accent-fg: #000000;
+    --accent-soft: #1a1a1a;
+    --accent-line: #ededed;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .6), 0 8px 24px -14px rgba(0, 0, 0, .9);
+  }
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 4rem;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 400 15px/1.5 "IBM Plex Mono", ui-monospace, SFMono-Regular, "SF Mono",
+        Menlo, Consolas, monospace;
+  font-feature-settings: "kern" 1, "liga" 1;
+  text-rendering: optimizeLegibility;
+}
+
+img { max-width: 100%; height: auto; }
+
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-decoration-thickness: .06em;
+  text-underline-offset: .18em;
+}
+a:hover { text-decoration-color: currentColor; }
+
+.brand, .site-nav a, .skip, .talk-thumb {
+  text-decoration: none;
+}
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+
+.wrap { width: 100%; max-width: var(--wide); margin: 0 auto; padding: 0 1.25rem; }
+
+/* Deliberately NOT a per-block max-width here. That was the bug: a block that
+   set `margin: 0` later in this file (.news, .pubs, .callout) silently dropped
+   the auto margins and sat flush left while its neighbours centred, so section
+   edges went ragged. The wrap is the measure now; blocks inherit one edge. */
+.prose { max-width: var(--prose); }
+
+/* ---------- skip link ---------- */
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  padding: .6rem 1rem;
+  background: var(--accent);
+  color: var(--accent-fg);
+  z-index: 100;
+}
+.skip:focus { left: 0; }
+
+/* ---------- header: full-bleed banner ---------- */
+
+/* The bar bleeds to the viewport so nothing scrolls through beside it; the CELLS
+   are what stay clamped to the text column. */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--bar);
+  color: var(--bar-fg);
+}
+
+.banner {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  max-width: var(--wide);
+  margin: 0 auto;
+  padding: 0;
+  background: var(--bar);
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.banner::-webkit-scrollbar { display: none; }
+
+.banner > li { display: flex; flex: 1 1 0; min-width: 0; }
+
+.banner > li + li { border-left: 1px solid var(--bar-rule); }
+
+.banner a,
+.banner .cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0;
+  flex: 1;
+  min-width: 0;
+  padding: .34rem .7rem .4rem;
+  color: var(--bar-fg);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background .12s ease, color .12s ease;
+}
+
+.banner .idx {
+  font-size: .58rem;
+  line-height: 1.35;
+  font-weight: 500;
+  letter-spacing: .06em;
+  font-variant-numeric: tabular-nums;
+  color: var(--bar-idx);
+}
+
+.banner .label {
+  font-size: .82rem;
+  line-height: 1.3;
+  font-weight: 400;
+  letter-spacing: -.01em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.banner .brand-cell {
+  flex: 0 0 auto;
+  overflow: hidden;
+  max-width: 14rem;
+  transition: max-width .24s ease, opacity .18s ease;
+}
+
+/* while the page's own name is on screen, the banner's copy is redundant. It
+   collapses to zero width rather than switching off, so the other cells widen
+   into the space instead of jumping. */
+.site-header[data-name-visible] .brand-cell.decorative {
+  max-width: 0;
+  opacity: 0;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .banner .brand-cell { transition: none; }
+}
+
+.banner .brand-cell .label { font-weight: 600; }
+
+.banner .brand-cell .idx { display: flex; align-items: center; gap: .4rem; }
+.banner .brand-cell img { width: 14px; height: 16px; filter: var(--bar-mark-filter); }
+
+.banner a:hover { background: var(--bar-hover); text-decoration: none; }
+
+.banner a[aria-current="page"] { background: var(--bar-current-bg); color: var(--bar-current-fg); }
+.banner a[aria-current="page"] .idx { color: var(--bar-current-idx); }
+.banner a[aria-current="page"]:hover { background: var(--bar-current-bg); }
+
+.banner .ext .idx::after { content: "\2197"; }
+
+@media (max-width: 46rem) {
+  .banner a, .banner .cell { padding: .3rem .7rem .35rem; }
+  .banner .label { font-size: .88rem; }
+  /* grow to fill the bar when there is room, never shrink below the label when
+     there is not -- `0 0 auto` did the second half only, so a narrow window left
+     the cells huddled at the left with dead bar beside them */
+  .banner > li { flex: 1 0 auto; }
+  .banner .brand-cell.decorative { display: none; }
+  .banner { max-width: 100%; }
+}
+
+/* ---------- headings & sections ---------- */
+
+.section { padding: 1.9rem 0 0; }
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: .75rem;
+  margin-bottom: .7rem;
+  padding-bottom: .35rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.section-head h2 {
+  margin: 0;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+.section-head .hint { font-size: .9rem; color: var(--muted); }
+
+p { margin: 0 0 .55rem; }
+p:last-child { margin-bottom: 0; }
+
+/* ---------- hero ---------- */
+
+.hero { padding: 1.6rem 0 .3rem; }
+
+.hero-grid { display: block; }
+
+/* seal on the left, spanning name + links */
+.hero-id {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 1.15rem;
+  align-items: center;
+  margin: 0 0 1.05rem;
+}
+
+.hero-mark {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  align-self: center;
+  display: block;
+  width: 62px;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.hero h1 {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0 0 .45rem;
+  font-size: clamp(1.75rem, 1.2rem + 2vw, 2.4rem);
+  line-height: 1.08;
+  letter-spacing: -.025em;
+}
+
+.hero h1 .degree {
+  font-size: .8em;
+  font-weight: inherit;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+}
+
+.idlinks {
+  grid-column: 2;
+  grid-row: 2;
+  margin: 0;
+  font-size: .95rem;
+  color: var(--muted);
+}
+
+.idlinks .sep { margin: 0 .55rem; color: var(--muted); }
+
+/* a page's one-line gloss sits BESIDE its title, on the title's baseline, rather
+   than starting a second line for a fragment */
+.page-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: .3rem .9rem;
+}
+
+.hero .role {
+  margin: 0;
+  color: var(--fg-soft);
+  font-size: 1.02rem;
+}
+
+.hero .bio { color: var(--fg-soft); }
+.hero .bio strong { color: var(--fg); font-weight: 600; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .hero-mark { filter: invert(1); }
+}
+
+  :root[data-theme="dark"] .hero-mark { filter: invert(1); }
+
+@media (max-width: 40rem) {
+  .hero { padding-top: 2rem; }
+  .hero-id { column-gap: .85rem; margin-bottom: 1.5rem; }
+  .hero-mark { width: 48px; }
+}
+
+/* ---------- callout ---------- */
+
+.callout {
+  margin: 1.2rem 0 0;
+  padding: 0 0 0 1rem;
+  border: 0;
+  border-left: 1px solid var(--rule-strong);
+  background: none;
+}
+
+/* the label runs into the sentence rather than sitting on its own line */
+.callout-label {
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+.callout-label::after { content: ":"; }
+
+.callout p { color: var(--fg-soft); }
+
+.callout .email { color: var(--fg); }
+
+/* ---------- figures ---------- */
+
+figure { margin: 0; }
+
+/* the inline chart follows the page theme instead of freezing one palette */
+:root {
+  --chart-ink: var(--fg);
+  --chart-canvas: var(--bg);
+  --chart-accent: var(--fg);
+  --chart-faint: #8c8c8c;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --chart-faint: #6f6f6f; }
+}
+
+  :root[data-theme="dark"] { --chart-faint: #6f6f6f; }
+
+.figure { margin: 1rem 0 0; }
+
+.figure img,
+.figure svg { display: block; width: 100%; height: auto; }
+
+.figure figcaption { margin-top: .45rem; font-size: .85rem; line-height: 1.35; color: var(--muted); }
+
+/* ---------- news ---------- */
+
+.news { margin: 0; padding: 0; list-style: none; }
+
+.news li {
+  display: grid;
+  grid-template-columns: 4.25rem minmax(0, 1fr);
+  gap: .75rem;
+  padding: .28rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.news li:last-child { border-bottom: 0; }
+
+.news time,
+.news .when {
+  font-variant-numeric: tabular-nums;
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  color: var(--muted);
+  padding-top: .12rem;
+}
+
+.news p { margin: 0; color: var(--fg-soft); }
+
+@media (max-width: 30rem) {
+  .news li { grid-template-columns: minmax(0, 1fr); gap: .15rem; }
+}
+
+/* ---------- publications ---------- */
+
+.pubs { margin: 0; padding: 0; list-style: none; }
+
+.pubs > li { padding: .55rem 0; border-bottom: 1px solid var(--rule); }
+.pubs > li:last-child { border-bottom: 0; }
+
+.chip {
+  display: inline-block;
+  padding: .06rem .38rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+
+/* the venue chip sits beside the title, not stacked over it. Inline rather than
+   a flex row: a flex item's second line would align under the title's start,
+   hanging the whole entry off the chip's width. */
+.pubs .pub-head { margin: 0 0 .15rem; }
+
+/* the citation flows straight out of the tag, so it needs the gap set here */
+.pubs .pub .chip { margin-right: .6rem; }
+
+.pubs .pub-title { font-weight: 600; line-height: 1.3; }
+
+/* one flowing citation: title, authors, venue run together and wrap as prose */
+.pubs .pub { margin: 0; }
+
+.pubs .authors { font-size: .92rem; color: var(--fg-soft); }
+
+.pubs .where { font-size: .88rem; color: var(--muted); }
+
+/* the award badge is a block of its own; a footnote marker rides on the citation,
+   set off by a quad rather than a line break */
+.pubs .award-line { margin: .2rem 0 0; }
+
+.pubs .note { margin-left: 1em; }
+
+.pubs .note { font-size: .84rem; color: var(--muted); }
+
+.pubs .award {
+  display: inline-block;
+  margin-top: .4rem;
+  padding: .12rem .5rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  font-size: .78rem;
+  color: var(--fg-soft);
+}
+
+.me { font-weight: 700; color: var(--fg); }
+
+/* ---------- minor aside (low-prominence note) ---------- */
+
+.minor {
+  margin-top: 1rem;
+  padding-top: .6rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: .85rem;
+}
+
+.minor summary {
+  cursor: pointer;
+  list-style: none;
+  color: var(--muted);
+  font-size: .85rem;
+}
+.minor summary::-webkit-details-marker { display: none; }
+.minor summary::before { content: "\25B8\00A0"; }
+.minor details[open] summary::before { content: "\25BE\00A0"; }
+.minor summary:hover { color: var(--fg-soft); }
+
+.minor p { margin: .4rem 0 .35rem; line-height: 1.4; }
+
+.minor img {
+  display: block;
+  width: 100%;
+  max-width: 30rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+}
+
+/* ---------- talks (responsive card grid) ---------- */
+
+.talks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* No card: the picture IS the card. Nothing is drawn around a talk -- no border,
+   no radius, no fill -- so the covers sit on the page in a grid and the text
+   hangs off the image's own left edge. The only hover is the image itself. */
+.talk {
+  display: flex;
+  flex-direction: column;
+}
+
+.talk-thumb {
+  display: block;
+  aspect-ratio: 16 / 9;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.talk-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .3s ease, filter .2s ease;
+}
+.talk:hover .talk-thumb img { transform: scale(1.02); filter: contrast(1.04); }
+
+.talk-body { display: flex; flex-direction: column; gap: .3rem; padding: .55rem 0 0; flex: 1; }
+
+/* the venue tag rides on the work's name, not a line of its own */
+.talk h3 .chip { margin-right: .5rem; vertical-align: .1em; }
+
+.talk h3 { margin: 0; font-size: 1.12rem; line-height: 1.2; letter-spacing: -.015em; }
+
+.talk .subtitle { margin: 0; color: var(--fg-soft); font-size: .95rem; line-height: 1.32; }
+
+/* A pill group is part of the sentence before it, not a row under it. */
+.links { margin-left: .45rem; vertical-align: .06em; }
+
+
+.talk details { border-top: 1px solid var(--rule); padding-top: .65rem; }
+
+.talk summary {
+  cursor: pointer;
+  font-size: .85rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  list-style: none;
+}
+.talk summary::-webkit-details-marker { display: none; }
+.talk summary::before { content: "▸ "; display: inline-block; transition: transform .15s ease; }
+.talk details[open] summary::before { content: "▾ "; }
+.talk summary:hover { color: var(--accent); }
+
+.talk details p { margin: .4rem 0 0; font-size: .9rem; line-height: 1.45; color: var(--fg-soft); }
+
+/* ---------- footer ---------- */
+
+.site-footer { margin-top: 2.4rem; border-top: 1px solid var(--rule); background: var(--surface); }
+
+/* The theme switch is position:fixed at bottom .75rem, so it is NOT in this
+   row and align-items cannot reach it. What lines the two up is arithmetic:
+   the switch's centre sits .75rem + half its 27px height = 26px off the bottom,
+   and the copyright's centre sits padding-bottom + half its 20px line. At 1rem
+   they land on the same 26px, which is also what makes the padding symmetric. */
+.site-footer .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 1.25rem;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-size: .85rem;
+  color: var(--muted);
+}
+
+@media print {
+  .site-header, .site-footer, .links { display: none; }
+  .talk details { display: block; }
+  body { font-size: 11pt; }
+}
+
+/* ---------- theme switch ---------- */
+
+/* Placement only. Everything about how it LOOKS is the `quiet` component, which
+   this shares with any other group of links that should not shout. */
+.theme-switch {
+  position: fixed;
+  bottom: .75rem;
+  left: 50%;
+  transform: translateX(calc(min(50vw, var(--wide) / 2) - 1.25rem - 100%));
+  z-index: 30;
+}
+
+/* It floats OVER the page, so it takes glass rather than paint: the content
+   under it stays legible as a blur instead of being hidden by a slab. The
+   opaque background from `quiet` is the fallback where backdrop-filter is not
+   supported. */
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .theme-switch {
+    background: color-mix(in srgb, var(--bg) 70%, transparent);
+    -webkit-backdrop-filter: saturate(1.7) blur(14px);
+    backdrop-filter: saturate(1.7) blur(14px);
+  }
+}
+
+@media print { .theme-switch { display: none; } }
+
+/* ==== component: quiet (canonical -- edit tools/quiet.css, never a copy) ====
+
+   A group of links or controls that belong to the thing above them rather than
+   asking to be pressed: a paper's ACM/arXiv links, a theme switcher. One hairline
+   ring around the set, hairline seams between members, no borders of their own,
+   and the whole group sits back at partial opacity until a pointer or the
+   keyboard arrives.
+
+   Use: <p class="quiet"><a>ACM</a><a>arXiv</a></p>
+   Positioning is the caller's business; this only says how it looks. */
+
+.quiet {
+  display: inline-flex;
+  gap: 1px;
+  padding: 2px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--bg);
+  opacity: .62;
+  transition: opacity .15s ease;
+}
+
+.quiet:hover,
+.quiet:focus-within { opacity: 1; }
+
+.quiet > * {
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+  padding: .12rem .55rem;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: .72rem;
+  line-height: 1.5;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.quiet > *:hover {
+  background: var(--surface-2);
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.quiet > *[aria-pressed="true"] {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) { .quiet { transition: none; } }
+
+/* ==== end component: quiet ==== */
+
+/* ---------- colour polish ---------- */
+
+/* Everything here is derived from --accent, so a page that redeclares its accent
+   gets a matching set for free and nothing has to be hand-picked per site. The
+   plain values above stay as the fallback: without color-mix() the pages simply
+   render neutral, which is what they did before. */
+@supports (color: color-mix(in srgb, red 50%, blue)) {
+  :root {
+    /* surfaces carry a few per cent of the accent instead of being neutral grey,
+       so a card belongs to the palette rather than sitting beside it */
+    --surface: color-mix(in srgb, var(--accent) 4%, var(--bg));
+    --surface-2: color-mix(in srgb, var(--accent) 8%, var(--bg));
+    --rule: color-mix(in srgb, var(--accent) 12%, var(--rule-strong));
+  }
+
+  /* A bar of flat colour reads as a swatch; a sliver of light across it reads as
+     a surface. 4% either side of the accent -- enough to catch the eye, not
+     enough to notice as a gradient. */
+  .site-header {
+    background: linear-gradient(
+      160deg,
+      color-mix(in srgb, var(--bar) 92%, white) 0%,
+      var(--bar) 45%,
+      color-mix(in srgb, var(--bar) 94%, black) 100%);
+  }
+
+  .banner { background: transparent; }
+
+  /* A wash under the masthead, fading out before the first section: it gives the
+     top of the page a temperature without tinting the whole canvas. */
+  body {
+    background-image: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--accent) 7%, var(--bg)) 0,
+      var(--bg) 340px);
+    background-repeat: no-repeat;
+  }
+
+  /* the rule under a section head picks up the accent as it travels right */
+  .section-head {
+    border-bottom: 0;
+    background: linear-gradient(90deg, var(--accent) 0, transparent 62%) bottom / 100% 1px no-repeat;
+  }
+
+  .card:hover { border-color: color-mix(in srgb, var(--accent) 45%, var(--rule-strong)); }
+
+  .chip { background: color-mix(in srgb, var(--accent) 13%, var(--bg)); }
+}
+
+/* ---------- the footer sits at the bottom of the viewport ---------- */
+
+/* A short page used to leave the footer floating halfway up with dead canvas
+   under it. The column is the body itself: main takes the slack, so the footer
+   lands on the fold when the content is short and flows normally when it is not.
+   svh, not vh: on mobile vh counts the address bar and overshoots. */
+body {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+main { flex: 1 0 auto; }
+
+/* The seal spans BOTH lines of the brand cell rather than sitting inline inside
+   the index line. Lifted out of .idx (in the markup) and taken out of flow here,
+   so HPC/AI lines up with 01, 02, ... and the name with Home, Publications, ...
+   by the same rules every other cell already follows. */
+.banner .brand-cell .cell {
+  position: relative;
+  padding-left: 2.35rem;
+}
+
+.banner .brand-cell img {
+  position: absolute;
+  left: .7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 23px;
+  height: 26px;
+}
+
+/* the canonical rule makes this a flex row for the inline mark; it holds text only now */
+.banner .brand-cell .idx { display: block; gap: 0; }
+
+/* ---------- masthead: glass, and colour one cell at a time ---------- */
+
+/* Every site wears the bar the PI's site wears: not a coloured slab but the page
+   itself, pinned, with whatever scrolls under it going soft. The site's colour is
+   not gone -- it is what a single CELL becomes under the pointer, while the rest
+   of the bar stays exactly as it was.
+   No edit to the shared banner block: that block already paints a hovered cell
+   with --bar-hover, so this is only a token. The wash is light enough that the
+   cell keeps its resting ink: no text rule at all. */
+:root {
+  --bar: rgba(255, 255, 255, .72);
+  --bar-fg: var(--fg);
+  --bar-idx: var(--muted);
+  --bar-rule: transparent;
+  --bar-hover: rgba(211, 211, 211, .25);
+  --bar-current-bg: rgba(0, 0, 0, .06);
+  --bar-current-fg: var(--fg);
+  --bar-current-idx: var(--muted);
+  --bar-mark-filter: none;
+}
+
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bar: rgba(18, 18, 18, .72);
+    --bar-fg: var(--fg);
+    --bar-idx: var(--muted);
+    --bar-rule: transparent;
+    --bar-hover: rgba(211, 211, 211, .25);
+    --bar-current-bg: rgba(255, 255, 255, .09);
+    --bar-current-fg: var(--fg);
+    --bar-current-idx: var(--muted);
+    --bar-mark-filter: invert(1);
+  }
+}
+
+:root[data-theme="dark"] {
+  --bar: rgba(18, 18, 18, .72);
+  --bar-fg: var(--fg);
+  --bar-idx: var(--muted);
+  --bar-rule: transparent;
+  --bar-hover: rgba(211, 211, 211, .25);
+  --bar-current-bg: rgba(255, 255, 255, .09);
+  --bar-current-fg: var(--fg);
+  --bar-current-idx: var(--muted);
+  --bar-mark-filter: invert(1);
+}
+
+.site-header {
+  background: var(--bar);
+  border-bottom: 1px solid var(--rule);
+}
+
+.banner { background: transparent; }
+
+/* Without backdrop-filter the bar is still a legible, mostly opaque strip. */
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .site-header {
+    -webkit-backdrop-filter: saturate(1.8) blur(16px);
+    backdrop-filter: saturate(1.8) blur(16px);
+  }
+}
+
+
+/* ---------- a page title and its gloss share a line ---------- */
+
+/* `flex-wrap: wrap` let the gloss drop below the title as soon as the two
+   together outgrew the column -- on the lab's Projects page that happened below
+   720px, which is an ordinary window. nowrap keeps the gloss on the title's
+   line and `min-width: 0` lets it shrink and wrap WITHIN its own box instead,
+   so the rule holds at any width and does not depend on how long the copy is.
+   A phone gets its line back: below 34rem there is no room to share. */
+.page-head,
+.hero-id {
+  flex-wrap: nowrap;
+}
+
+.page-head > .role,
+.hero-id > .role {
+  min-width: 0;
+}
+
+@media (max-width: 34rem) {
+  .page-head,
+  .hero-id { flex-wrap: wrap; }
+  .page-head > .role,
+  .hero-id > .role { min-width: 100%; }
+}

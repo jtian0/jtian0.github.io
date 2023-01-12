@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Presentations: Jiannan Tian</title>
+  <meta name="description"
+    content="Peer-reviewed papers and conference presentations by Jiannan Tian: cuSZ-i, FZ-GPU, cuSZ+, GPU Huffman coding, cuSZ, and waveSZ.">
+  <meta name="author" content="Jiannan Tian">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#000000">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#000000">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
+  <link rel="canonical" href="https://jti.one/presentations.html">
+  <link rel="icon" href="assets/img/seal.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+<script>
+// Applied before first paint so a forced theme never flashes the other one.
+try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t } catch (e) {}
+</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Presentations: Jiannan Tian">
+  <meta property="og:description"
+    content="Peer-reviewed papers and conference presentations on GPU-accelerated scientific lossy compression.">
+  <meta property="og:image" content="assets/img/talk-cusz-i.jpg">
+</head>
+
+<body>
+
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav aria-label="Primary">
+      <ul class="banner">
+      <li class="brand-cell decorative">
+          <a class="cell" href="index.html">
+            <img src="assets/img/seal.png" alt="" width="23" height="26">
+            <span class="idx">HPC/AI</span>
+            <span class="label">Jiannan Tian</span>
+          </a>
+        </li>
+      <li><a href="index.html"><span class="idx">01</span><span class="label">Home</span></a></li>
+      <li><a href="index.html#publications"><span class="idx">02</span><span class="label">Publications</span></a></li>
+      <li><a href="presentations.html" aria-current="page"><span class="idx">03</span><span class="label">Presentations</span></a></li>
+      <li><a class="ext" href="https://mercury-hpg.github.io/"><span class="idx"></span><span class="label">Lab</span></a></li>
+    </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <section class="hero">
+      <div class="wrap">
+        <div class="page-head">
+          <h1>Presentations</h1>
+          <p class="role">Peer-reviewed papers and the talks that went with them.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <ul class="talks">
+
+          <li class="talk">
+            <div class="talk-thumb">
+              <img src="assets/img/talk-cusz-i.jpg" alt="Title slide of the cuSZ-i talk at SC '24" width="1920"
+                height="1080" loading="lazy" decoding="async">
+            </div>
+            <div class="talk-body">
+              <h3><span class="chip">SC '24</span>cuSZ-<i>i</i></h3>
+              <p class="subtitle">High-ratio Scientific Lossy Compression on GPUs with Optimized
+                Multi-level Interpolation</p>
+              <p class="subtitle">Based on spline interpolation, both data quality and compression
+                ratio are improved. <span class="links quiet"><a href="https://drive.google.com/file/d/1N2iNnr84G6OxXkSQNdANEwyUM7VqGzeI/view?usp=sharing">Paper</a><a href="https://drive.google.com/file/d/1UKiHs-KVp3jUO1moWTCbkxSqa9y6mz6q/view?usp=share_link">Slides</a></span></p>
+            </div>
+          </li>
+
+          <li class="talk">
+            <div class="talk-thumb">
+              <img src="assets/img/talk-fz-gpu.jpg" alt="Title slide of the FZ-GPU talk at HPDC '23" width="2000"
+                height="1123" loading="lazy" decoding="async">
+            </div>
+            <div class="talk-body">
+              <h3><span class="chip">HPDC '23</span>FZ-GPU</h3>
+              <p class="subtitle">Fast GPU Lossy Compressor for Scientific Computing Applications</p>
+              <p class="subtitle">Yet another piece of fast GPU-based lossy compression practice for
+                scientific data. <span class="links quiet"><a href="https://arxiv.org/abs/2304.12557">Paper</a><a href="https://drive.google.com/file/d/1MzzVSMCalBLk23HNaelPpgNOad0mRFBz/view?usp=share_link">Slides</a></span></p>
+            </div>
+          </li>
+
+          <li class="talk">
+            <div class="talk-thumb">
+              <img src="assets/img/talk-cusz-plus.jpg" alt="Title slide of the cuSZ+ talk at CLUSTER '21" width="1889"
+                height="1061" loading="lazy" decoding="async">
+            </div>
+            <div class="talk-body">
+              <h3><span class="chip">CLUSTER '21</span>cuSZ+</h3>
+              <p class="subtitle">Optimizing Error-Bounded Lossy Compression for Scientific Data on
+                GPUs <span class="links quiet"><a href="https://drive.google.com/file/d/1oSKxOSihHUNBeDwVVIBk2rXVv_ykquMF/view?usp=sharing">Paper</a><a href="https://drive.google.com/file/d/1t9D9GZmpDtFRk5jD0jpQTvL4A1mBCoPY/view?usp=sharing">Slides</a></span></p>
+              <details>
+                <summary>Abstract</summary>
+                <p>Our key contributions in this work are fourfold: (1) We propose an efficient
+                  compression workflow to adaptively perform run-length encoding and/or
+                  variable-length encoding. (2) We derive Lorenzo reconstruction in decompression as
+                  multidimensional partial-sum computation and propose a fine-grained Lorenzo
+                  reconstruction algorithm for GPU architectures. (3) We carefully optimize each of
+                  cuSZ kernels by leveraging state-of-the-art CUDA parallel primitives. (4) We
+                  evaluate cuSZ+ using seven real-world HPC application datasets on V100 and A100
+                  GPUs. Experiments show cuSZ+ improves the compression throughputs and ratios by up
+                  to 18.4× and 5.3×, respectively, over cuSZ on the tested datasets.</p>
+              </details>
+            </div>
+          </li>
+
+          <li class="talk">
+            <div class="talk-thumb">
+              <img src="assets/img/talk-huffman.jpg" alt="Title slide of the GPU Huffman coding talk at IPDPS '21"
+                width="1889" height="1061" loading="lazy" decoding="async">
+            </div>
+            <div class="talk-body">
+              <h3><span class="chip">IPDPS '21</span>Huffman ReVISIT</h3>
+              <p class="subtitle">Toward Extreme Performance on Modern GPU Architectures <span class="links quiet"><a href="https://drive.google.com/file/d/15gv4wrnXCMmjsd-rWg_kMiW7YjAhZPPa/view?usp=sharing">Paper</a><a href="https://drive.google.com/file/d/1v6dzuzdth350FCELV5omJnYM75UX0MRk/view?usp=sharing">Slides</a></span></p>
+              <details>
+                <summary>Abstract</summary>
+                <p>The detailed contribution is four-fold. (1) We develop an efficient parallel
+                  codebook construction on GPUs that scales effectively with the number of input
+                  symbols. (2) We propose a novel reduction-based encoding scheme that can efficiently
+                  merge the codewords on GPUs. (3) We optimize the overall GPU performance by
+                  leveraging the state-of-the-art CUDA APIs such as Cooperative Groups. (4) We
+                  evaluate our Huffman encoder thoroughly using six real-world application datasets on
+                  two advanced GPUs and compare it with our implemented multi-threaded Huffman
+                  encoder. Experiments show that our solution can improve the encoding throughput by
+                  up to 5.0× and 6.8× on NVIDIA RTX 5000 and V100, respectively, over the
+                  state-of-the-art GPU Huffman encoder, and by up to 3.3× over the multi-thread
+                  encoder on two 28-core Xeon Platinum 8280 CPUs.</p>
+              </details>
+            </div>
+          </li>
+
+          <li class="talk">
+            <div class="talk-thumb">
+              <img src="assets/img/talk-cusz.jpg" alt="Title slide of the cuSZ talk at PACT '20" width="1889"
+                height="1061" loading="lazy" decoding="async">
+            </div>
+            <div class="talk-body">
+              <h3><span class="chip">PACT '20</span>cuSZ</h3>
+              <p class="subtitle">A High-Performance GPU Based Lossy Compression Framework for
+                Scientific Data <span class="links quiet"><a href="https://drive.google.com/file/d/1hDxovgW1NJWnsuhsOk9Ov-6vjwNwaAVK/view?usp=sharing">Paper</a><a href="https://drive.google.com/file/d/1IBq-Udv9n-32zNCMjHbFj78WrK4mGCBK/view?usp=sharing">Slides</a></span></p>
+              <details>
+                <summary>Abstract</summary>
+                <p>Our contributions are fourfold. (1) We propose a dual-quantization scheme to
+                  entirely remove the data dependency in the prediction step of SZ such that this step
+                  can be performed very efficiently on GPUs. (2) We develop an efficient customized
+                  Huffman coding for the SZ compressor on GPUs. (3) We implement cuSZ using CUDA and
+                  optimize its performance by improving the utilization of GPU memory bandwidth.
+                  (4) We evaluate our cuSZ on five real-world HPC application datasets from the
+                  Scientific Data Reduction Benchmarks and compare it with other state-of-the-art
+                  methods on both CPUs and GPUs. Experiments show that our cuSZ improves SZ's
+                  compression throughput by up to 370.1× and 13.1×, respectively, over the production
+                  version running on single and multiple CPU cores, respectively, while getting the
+                  same quality of reconstructed data. It also improves the compression ratio by up to
+                  3.48× on the tested data compared with another state-of-the-art GPU-supported lossy
+                  compressor.</p>
+              </details>
+            </div>
+          </li>
+
+          <li class="talk">
+            <div class="talk-thumb">
+              <img src="assets/img/talk-wavesz.jpg" alt="Title slide of the waveSZ talk at PPoPP '20" width="1889"
+                height="1061" loading="lazy" decoding="async">
+            </div>
+            <div class="talk-body">
+              <h3><span class="chip">PPoPP '20</span>waveSZ</h3>
+              <p class="subtitle">A Hardware-Algorithm Co-Design of Efficient Lossy Compression for
+                Scientific Data <span class="links quiet"><a href="https://drive.google.com/file/d/1qoFuMYELrjAqcVo_K_gvK6eUScu4_wL8/view?usp=sharing">Paper</a><a href="https://drive.google.com/file/d/1OEY4fivpda8VMZ0qtO1MHP3RrscQOOsW/view?usp=sharing">Slides</a></span></p>
+              <details>
+                <summary>Abstract</summary>
+                <p>Our contributions are fourfold. (1) We adopt a wavefront memory layout to alleviate
+                  the data dependency during the prediction for higher-dimensional predictors, such as
+                  the Lorenzo predictor. (2) We propose a co-design framework named waveSZ based on
+                  the wavefront memory layout and the characteristics of SZ algorithm and carefully
+                  implement it by using high-level synthesis. (3) We propose a hardware-algorithm
+                  co-optimization method to improve the performance. (4) We evaluate our proposed
+                  waveSZ on three real-world HPC simulation datasets from the Scientific Data
+                  Reduction Benchmarks and compare it with other state-of-the-art methods on both CPUs
+                  and FPGAs. Experiments show that our waveSZ can improve SZ's compression throughput
+                  by 6.9×∼8.7× over the production version running on a state-of-the-art CPU and
+                  improve the compression ratio and throughput by 2.1× and 5.8× on average,
+                  respectively, compared with the state-of-the-art FPGA design.</p>
+              </details>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© Jiannan Tian</span>
+      <div class="theme-switch quiet" role="group" aria-label="Colour theme">
+        <button type="button" data-theme-set="light">Light</button>
+        <button type="button" data-theme-set="dark">Dark</button>
+        <button type="button" data-theme-set="auto">Auto</button>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // The banner's name is a stand-in for the one in the page. While the real one is
+    // on screen it would just be saying it twice, so it hides; it comes back as soon
+    // as the hero scrolls under the bar. No JS (or no observer) leaves it visible,
+    // which is the state that is never wrong.
+    (() => {
+      const header = document.querySelector('.site-header')
+      const hero = document.querySelector('.hero-id')
+      if (!header || !hero || !('IntersectionObserver' in window)) return
+      const bar = () => header.getBoundingClientRect().height
+      new IntersectionObserver(
+        ([entry]) => header.toggleAttribute('data-name-visible', entry.isIntersecting),
+        { rootMargin: `-${Math.round(bar())}px 0px 0px 0px` },
+      ).observe(hero)
+    })()
+  </script>
+
+<script>
+// light/dark/auto. `auto` removes the attribute and lets the system's own
+// prefers-color-scheme decide, which is why it is the default rather than a
+// third palette.
+(() => {
+  const root = document.documentElement
+  const btns = [...document.querySelectorAll('[data-theme-set]')]
+  const read = () => { try { return localStorage.getItem('theme') || 'auto' } catch (e) { return 'auto' } }
+  const apply = (t) => {
+    if (t === 'auto') delete root.dataset.theme
+    else root.dataset.theme = t
+    for (const b of btns) b.setAttribute('aria-pressed', String(b.dataset.themeSet === t))
+  }
+  apply(read())
+  for (const b of btns) b.addEventListener('click', () => {
+    const t = b.dataset.themeSet
+    try { localStorage.setItem('theme', t) } catch (e) {}
+    apply(t)
+  })
+})()
+</script>
+
+</body>
+
+</html>
