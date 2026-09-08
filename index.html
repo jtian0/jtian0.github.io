@@ -95,10 +95,8 @@ try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark'
     </section>
 
     <section class="section">
+      <div class="section-head tab"><h2>Research Theme</h2></div>
       <div class="wrap">
-        <div class="section-head prose">
-          <h2>Research Theme</h2>
-        </div>
         <figure class="figure prose">
           <!-- prettier-ignore --><svg role="img" aria-label="Peak FLOPS grows far faster than memory size and storage bandwidth across seven leading machines, 2008 to 2023" class="plot-d6a7b5" fill="currentColor" font-family="system-ui, sans-serif" font-size="10" text-anchor="middle" width="768" height="331" viewBox="0 0 768 331" style="background: transparent; color: var(--chart-ink); font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; overflow: visible;" xmlns="http://www.w3.org/2000/svg"><style>:where(.plot-d6a7b5) {
   --plot-background: white;
@@ -116,10 +114,8 @@ try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark'
     </section>
 
     <section class="section" id="news">
+      <div class="section-head tab"><h2>Latest news</h2></div>
       <div class="wrap">
-        <div class="section-head prose">
-          <h2>Latest news</h2>
-        </div>
         <ul class="news">
           <li><span class="when">Upcoming</span>
             <p>We are hosting the <a href="https://echo-workshop.github.io">ECHO Workshop</a>: The 1st International
@@ -155,14 +151,12 @@ try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark'
     </section>
 
     <section class="section" id="publications">
+      <div class="section-head tab"><h2>Selected publications</h2></div>
       <div class="wrap">
-        <div class="section-head prose">
-          <h2>Selected publications</h2>
-          <span class="hint">Full list on <a href="https://scholar.google.com/citations?user=Si2zZaIAAAAJ">Google
-              Scholar</a> or in my <a
-              href="https://drive.google.com/file/d/1XJlTlTMHI0RmRiRKhS7dlydKdMj6H35Z/view?usp=share_link">CV
-              (PDF)</a>.</span>
-        </div>
+        <p class="pub-hint">Full list on <a href="https://scholar.google.com/citations?user=Si2zZaIAAAAJ">Google
+            Scholar</a> or in my <a
+            href="https://drive.google.com/file/d/1XJlTlTMHI0RmRiRKhS7dlydKdMj6H35Z/view?usp=share_link">CV
+            (PDF)</a>.</p>
 
         <ol class="pubs">
           <li>
@@ -292,6 +286,25 @@ try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark'
         ([entry]) => header.toggleAttribute('data-name-visible', entry.isIntersecting),
         { rootMargin: `-${Math.round(bar())}px 0px 0px 0px` },
       ).observe(hero)
+    })()
+  </script>
+
+  <script>
+    // A fixed accent would be predictable; each hover instead lands on a random
+    // vivid hue, kept away from light-gray. Set on the section (not the title)
+    // so the chart's --chart-ink/--chart-accent inherit the same colour.
+    // The .3s fade itself lives in the CSS `transition`.
+    (() => {
+      for (const h2 of document.querySelectorAll('.section-head.tab h2')) {
+        const section = h2.closest('.section')
+        if (!section) continue
+        section.addEventListener('mouseenter', () => {
+          const hue = Math.floor(Math.random() * 360)
+          const sat = 60 + Math.random() * 20
+          const light = 42 + Math.random() * 16
+          section.style.setProperty('--tab-hover-color', `hsl(${hue}deg ${sat.toFixed(0)}% ${light.toFixed(0)}%)`)
+        })
+      }
     })()
   </script>
 

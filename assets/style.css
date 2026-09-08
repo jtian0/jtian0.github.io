@@ -261,8 +261,8 @@ a:hover { text-decoration-color: currentColor; }
   display: flex;
   align-items: baseline;
   gap: .75rem;
+  padding: 0 1.25rem .35rem;
   margin-bottom: .7rem;
-  padding-bottom: .35rem;
   border-bottom: 1px solid var(--rule);
 }
 
@@ -275,7 +275,58 @@ a:hover { text-decoration-color: currentColor; }
   color: var(--fg);
 }
 
-.section-head .hint { font-size: .9rem; color: var(--muted); }
+.pub-hint {
+  margin: 0 0 .7rem;
+  padding-bottom: .35rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: .9rem;
+  color: var(--muted);
+}
+
+/* ---------- side tabs: Research Theme / Latest news / Selected publications ---------- */
+
+@media (min-width: 64rem) {
+  .section-head.tab {
+    display: block;
+    --tab-w: 2.9rem;
+    --tab-gap: .5rem;
+    margin: 0 0 0 calc(50% - (var(--wide) / 2) - var(--tab-w) - var(--tab-gap));
+    width: 0;
+    height: 0;
+    overflow: visible;
+    padding: 0;
+    border: 0;
+  }
+
+  .section-head.tab + .wrap {
+    padding-top: .35rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .section-head.tab h2 {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-size: 1.9rem;
+    font-weight: 700;
+    /* IBM Plex Mono tops out at 700; stroke fakes a heavier cut on top of it. */
+    -webkit-text-stroke: .5px currentColor;
+    letter-spacing: .04em;
+    white-space: nowrap;
+    color: var(--rule-strong);
+    transition: color .3s ease;
+    cursor: default;
+  }
+
+  .section:hover .section-head.tab h2 { color: var(--tab-hover-color, var(--accent)); }
+
+  /* figures are SVG using currentColor/var(--chart-ink); tint them with the
+     same random hue as the title so the whole section reacts together. */
+  .section:has(.section-head.tab):hover {
+    --chart-ink: var(--tab-hover-color, var(--accent));
+    --chart-accent: var(--tab-hover-color, var(--accent));
+  }
+}
 
 p { margin: 0 0 .55rem; }
 p:last-child { margin-bottom: 0; }
