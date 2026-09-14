@@ -47,7 +47,8 @@ try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark'
         </li>
       <li><a href="index.html" aria-current="page"><span class="idx">01</span><span class="label">Home</span></a></li>
       <li><a href="index.html#publications"><span class="idx">02</span><span class="label">Publications</span></a></li>
-      <li><a href="presentations.html"><span class="idx">03</span><span class="label">Presentations</span></a></li>
+      <li><a href="index.html#projects"><span class="idx">03</span><span class="label">Projects</span></a></li>
+      <li><a href="presentations.html"><span class="idx">04</span><span class="label">Presentations</span></a></li>
       <li><a class="ext" href="https://mercury-hpg.github.io/"><span class="idx"></span><span class="label">Lab</span></a></li>
     </ul>
     </nav>
@@ -256,6 +257,30 @@ try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark'
           </details>
         </aside>
         <!-- /CSRankings note -->
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="section-head tab"><h2>Projects</h2></div>
+      <div class="wrap">
+        <ul class="strips">
+          <li class="strip">
+            <span class="strip-main"><span class="chip">NSF CSSI</span> <span class="strip-name">SGCC</span> <span class="strip-desc">An efficient GPU-oriented data reduction cyberinfrastructure for scientific data analysis: portable, off-the-shelf compression for every primary GPU-equipped supercomputer.</span></span>
+            <span class="links quiet"><a href="https://mercury-hpg.github.io/SGCC-site/">Website</a><a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2609480">Award</a></span>
+          </li>
+          <li class="strip">
+            <span class="strip-main"><span class="chip">Compressor</span> <span class="strip-name">pSZ/cuSZ</span> <span class="strip-desc">A reference design of GPU-accelerated error-bounded lossy compression for scientific data.</span></span>
+            <span class="links quiet"><a href="https://mercury-hpg.github.io/PSZ-site/">Website</a><a href="https://github.com/szcompressor/cuSZ">Repo</a></span>
+          </li>
+          <li class="strip">
+            <span class="strip-main"><span class="chip">Codec</span> <span class="strip-name">Parallel Huffman</span> <span class="strip-desc">Huffman coding at extreme performance on modern GPU architectures: parallel codebook construction and reduction-based encoding.</span></span>
+            <span class="links quiet"><a href="https://mercury-hpg.github.io/PHF-site/">Website</a></span>
+          </li>
+          <li class="strip">
+            <span class="strip-main"><span class="chip">Benchmark</span> <span class="strip-name">FCBench</span> <span class="strip-desc">Cross-domain benchmarking of lossless compression for floating-point data.</span></span>
+            <span class="links quiet"><a href="https://github.com/Mercury-HPG/FCBench">Repo</a></span>
+          </li>
+        </ul>
       </div>
     </section>
 

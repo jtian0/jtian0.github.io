@@ -537,6 +537,40 @@ figure { margin: 0; }
 
 .pubs .note { font-size: .84rem; color: var(--muted); }
 
+/* ---------- projects ---------- */
+
+.strips {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.strips > li + li { border-top: 1px solid var(--rule); }
+
+.strip {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  column-gap: 1rem;
+  padding: .8rem 0;
+}
+
+.strip-main { min-width: 0; }
+
+.strip .chip { margin-right: .15rem; }
+
+.strip-name { font-weight: 700; }
+
+.strip-desc { color: var(--fg-soft); font-size: .9rem; }
+
+.strip .links { justify-self: end; }
+
+@media (max-width: 34rem) {
+  .strip { grid-template-columns: minmax(0, 1fr); row-gap: .45rem; }
+  .strip .links { justify-self: start; }
+}
+
 .pubs .award {
   display: inline-block;
   margin-top: .4rem;
