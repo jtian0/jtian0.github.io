@@ -30,6 +30,9 @@
   --prose: 800px;
   --wide: 800px;     /* the column; the banner tracks it, so both scale together */
 
+  --sans: "Helvetica Neue", Helvetica, Inter, Arial, "Nimbus Sans", "Liberation Sans",
+          system-ui, sans-serif;
+
   --radius: 10px;
   --radius-sm: 6px;
 
@@ -102,9 +105,9 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--fg);
-  font: 400 15px/1.5 "IBM Plex Mono", ui-monospace, SFMono-Regular, "SF Mono",
-        Menlo, Consolas, monospace;
+  font: 400 15px/1.45 var(--sans);
   font-feature-settings: "kern" 1, "liga" 1;
+  -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
@@ -309,8 +312,6 @@ a:hover { text-decoration-color: currentColor; }
     transform: rotate(180deg);
     font-size: 1.9rem;
     font-weight: 700;
-    /* IBM Plex Mono tops out at 700; stroke fakes a heavier cut on top of it. */
-    -webkit-text-stroke: .5px currentColor;
     letter-spacing: .04em;
     white-space: nowrap;
     color: var(--rule-strong);
