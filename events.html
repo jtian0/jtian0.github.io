@@ -67,6 +67,27 @@ try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark'
 
           <li class="card">
             <div class="card-thumb">
+              <img src="assets/img/event-icmla.jpg" alt="Oakland University campus, the ICMLA '26 venue" width="1024"
+                height="576" loading="lazy" decoding="async">
+              <p class="meta on-cover">In conj. with <strong>ICMLA '26</strong> · Rochester, Michigan, USA</p>
+              <button type="button" class="cta on-cover" data-seal-id="icmla-phd" data-expires="2026-10-08T08:00:00-04:00" data-sealed="RFmwW5n1b_Ci-SHP89-0h-X5mhNmUacbxwig1Os0EZva32sQhoEnATtGoGJgPIGVeixnFEWjQt3lgUpPw6CKRUCd2VBJKcApWoOGPHaVnCCYdvKwxFM2cR0bgpNvNK-dnTRbxMjC2pZfW9qorx1STiNzBdhp_7GW2K0T3qNjJKFOdlpq8bj29jtu8Yw">Forum Doc</button>
+              <span class="links quiet on-cover"><a href="https://www.icmla-conference.org/icmla26/">Website</a></span>
+            </div>
+            <div class="card-body">
+              <div class="card-head">
+                <h3>ICMLA PhD Forum <span class="when">· Oct. 7, 2026 (Wednesday)</span></h3>
+              </div>
+              <p class="subtitle">Doctoral Symposium and Industry Meet-Up at ICMLA '26, Oakland University. 15:20–17:00, Ballroom C East.</p>
+              <form class="unseal" hidden>
+                <input type="password" name="pass" autocomplete="current-password" placeholder="Passphrase" aria-label="Passphrase for the forum document" required>
+                <button type="submit">Open</button>
+                <span class="unseal-msg" role="status"></span>
+              </form>
+            </div>
+          </li>
+
+          <li class="card">
+            <div class="card-thumb">
               <img src="assets/img/event-iwbdr.jpg" alt="Phoenix skyline, the IWBDR-6 workshop banner" width="767"
                 height="431" loading="lazy" decoding="async">
               <p class="meta on-cover">In conj. with <strong>IEEE BigData 2026</strong> · Phoenix, Arizona, USA</p>
@@ -92,27 +113,6 @@ try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark'
                 <h3>ECHO <span class="when">· Nov. 20, 2026 (Friday)</span></h3>
               </div>
               <p class="subtitle">The 1st International Workshop on Edge-Cloud-HPC Operational Continuum.</p>
-            </div>
-          </li>
-
-          <li class="card">
-            <div class="card-thumb">
-              <img src="assets/img/event-icmla.jpg" alt="Oakland University campus, the ICMLA '26 venue" width="1024"
-                height="576" loading="lazy" decoding="async">
-              <p class="meta on-cover">In conj. with <strong>ICMLA '26</strong> · Rochester, Michigan, USA</p>
-              <button type="button" class="cta on-cover" data-seal-id="icmla-phd" data-expires="2026-10-08T08:00:00-04:00" data-sealed="RFmwW5n1b_Ci-SHP89-0h-X5mhNmUacbxwig1Os0EZva32sQhoEnATtGoGJgPIGVeixnFEWjQt3lgUpPw6CKRUCd2VBJKcApWoOGPHaVnCCYdvKwxFM2cR0bgpNvNK-dnTRbxMjC2pZfW9qorx1STiNzBdhp_7GW2K0T3qNjJKFOdlpq8bj29jtu8Yw">Forum doc</button>
-              <span class="links quiet on-cover"><a href="https://www.icmla-conference.org/icmla26/">Website</a></span>
-            </div>
-            <div class="card-body">
-              <div class="card-head">
-                <h3>ICMLA PhD Forum <span class="when">· Oct. 7, 2026 (Wednesday)</span></h3>
-              </div>
-              <p class="subtitle">Doctoral Symposium and Industry Meet-Up at ICMLA '26, Oakland University. 15:20–17:00, Ballroom C East.</p>
-              <form class="unseal" hidden>
-                <input type="password" name="pass" autocomplete="current-password" placeholder="Passphrase" aria-label="Passphrase for the forum document" required>
-                <button type="submit">Open</button>
-                <span class="unseal-msg" role="status"></span>
-              </form>
             </div>
           </li>
 
@@ -180,7 +180,7 @@ try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark'
     btn.hidden = true
     form.hidden = true
     if (!btn.closest('.card').querySelector('.sealed-closed')) {
-      form.insertAdjacentHTML('beforebegin', '<p class="subtitle sealed-closed">The forum doc link has closed.</p>')
+      form.insertAdjacentHTML('beforebegin', '<p class="subtitle sealed-closed">The Forum Doc link has closed.</p>')
     }
   }
   const subtle = globalThis.crypto && crypto.subtle
@@ -214,7 +214,7 @@ try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark'
         msg.textContent = ''
         form.pass.value = ''
         form.hidden = true
-        btn.textContent = 'Open forum doc'
+        btn.textContent = 'Open Forum Doc'
         window.open(url, '_blank', 'noopener')
       } catch (err) {
         msg.textContent = 'Wrong passphrase.'
@@ -224,8 +224,8 @@ try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark'
     if (hash.get('seal') === btn.dataset.sealId && hash.get('k')) {
       btn.textContent = 'Unlocking…'
       unseal(btn.dataset.sealed, hash.get('k'))
-        .then((u) => { url = u; btn.textContent = 'Open forum doc' })
-        .catch(() => { btn.textContent = 'Forum doc'; form.hidden = false; msg.textContent = 'That link\'s passphrase is wrong.' })
+        .then((u) => { url = u; btn.textContent = 'Open Forum Doc' })
+        .catch(() => { btn.textContent = 'Forum Doc'; form.hidden = false; msg.textContent = 'That link\'s passphrase is wrong.' })
     }
   }
 })()
