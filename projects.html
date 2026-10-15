@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects: Jiannan Tian</title>
+  <meta name="description"
+    content="Research projects led by Jiannan Tian: SGCC, pSZ/cuSZ, Parallel Huffman, and FCBench.">
+  <meta name="author" content="Jiannan Tian">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#000000">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#000000">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
+  <link rel="canonical" href="https://jti.one/projects.html">
+  <link rel="icon" href="assets/img/seal.png">
+  <link rel="stylesheet" href="assets/style.css">
+<script>
+// Applied before first paint so a forced theme never flashes the other one.
+try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t } catch (e) {}
+</script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Projects: Jiannan Tian">
+  <meta property="og:description"
+    content="Research projects led by Jiannan Tian: SGCC, pSZ/cuSZ, Parallel Huffman, and FCBench.">
+  <meta property="og:image" content="assets/img/seal.png">
+</head>
+
+<body>
+
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav aria-label="Primary">
+      <ul class="banner">
+      <li class="brand-cell decorative">
+          <a class="cell" href="index.html">
+            <img src="assets/img/seal.png" alt="" width="23" height="26">
+            <span class="idx">HPC/AI</span>
+            <span class="label">Jiannan Tian</span>
+          </a>
+        </li>
+      <li><a href="index.html"><span class="idx">01</span><span class="label">Home</span></a></li>
+      <li><a href="index.html#publications"><span class="idx">02</span><span class="label">Publications</span></a></li>
+      <li><a href="projects.html" aria-current="page"><span class="idx">03</span><span class="label">Projects</span></a></li>
+      <li><a href="presentations.html"><span class="idx">04</span><span class="label">Presentations</span></a></li>
+      <li><a href="events.html"><span class="idx">05</span><span class="label">Events</span></a></li>
+      <li><a class="ext" href="https://mercury-hpg.github.io/"><span class="idx"></span><span class="label">Lab</span></a></li>
+    </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <section class="hero">
+      <div class="wrap">
+        <div class="page-head">
+          <h1>Projects</h1>
+          <p class="role">Funded efforts, compressors, codecs, and benchmarks.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <ul class="strips">
+          <li class="strip">
+            <span class="strip-main"><span class="chip">NSF CSSI</span> <span class="strip-name">SGCC</span> <span class="strip-desc">An efficient GPU-oriented data reduction cyberinfrastructure for scientific data analysis: portable, off-the-shelf compression for every primary GPU-equipped supercomputer.</span></span>
+            <span class="links quiet"><a href="https://mercury-hpg.github.io/SGCC-site/">Website</a><a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=2609480">Award</a></span>
+          </li>
+          <li class="strip">
+            <span class="strip-main"><span class="chip">Compressor</span> <span class="strip-name">pSZ/cuSZ</span> <span class="strip-desc">A reference design of GPU-accelerated error-bounded lossy compression for scientific data.</span></span>
+            <span class="links quiet"><a href="https://mercury-hpg.github.io/PSZ-site/">Website</a><a href="https://github.com/szcompressor/cuSZ">Repo</a></span>
+          </li>
+          <li class="strip">
+            <span class="strip-main"><span class="chip">Codec</span> <span class="strip-name">Parallel Huffman</span> <span class="strip-desc">Huffman coding at extreme performance on modern GPU architectures: parallel codebook construction and reduction-based encoding.</span></span>
+            <span class="links quiet"><a href="https://mercury-hpg.github.io/PHF-site/">Website</a></span>
+          </li>
+          <li class="strip">
+            <span class="strip-main"><span class="chip">Benchmark</span> <span class="strip-name">FCBench</span> <span class="strip-desc">Cross-domain benchmarking of lossless compression for floating-point data.</span></span>
+            <span class="links quiet"><a href="https://github.com/Mercury-HPG/FCBench">Repo</a></span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© Jiannan Tian</span>
+      <div class="theme-switch quiet" role="group" aria-label="Colour theme">
+        <button type="button" data-theme-set="light">Light</button>
+        <button type="button" data-theme-set="dark">Dark</button>
+        <button type="button" data-theme-set="auto">Auto</button>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // The banner's name is a stand-in for the one in the page. While the real one is
+    // on screen it would just be saying it twice, so it hides; it comes back as soon
+    // as the hero scrolls under the bar. No JS (or no observer) leaves it visible,
+    // which is the state that is never wrong.
+    (() => {
+      const header = document.querySelector('.site-header')
+      const hero = document.querySelector('.hero-id')
+      if (!header || !hero || !('IntersectionObserver' in window)) return
+      const bar = () => header.getBoundingClientRect().height
+      new IntersectionObserver(
+        ([entry]) => header.toggleAttribute('data-name-visible', entry.isIntersecting),
+        { rootMargin: `-${Math.round(bar())}px 0px 0px 0px` },
+      ).observe(hero)
+    })()
+  </script>
+
+<script>
+// light/dark/auto. `auto` removes the attribute and lets the system's own
+// prefers-color-scheme decide, which is why it is the default rather than a
+// third palette.
+(() => {
+  const root = document.documentElement
+  const btns = [...document.querySelectorAll('[data-theme-set]')]
+  const read = () => { try { return localStorage.getItem('theme') || 'auto' } catch (e) { return 'auto' } }
+  const apply = (t) => {
+    if (t === 'auto') delete root.dataset.theme
+    else root.dataset.theme = t
+    for (const b of btns) b.setAttribute('aria-pressed', String(b.dataset.themeSet === t))
+  }
+  apply(read())
+  for (const b of btns) b.addEventListener('click', () => {
+    const t = b.dataset.themeSet
+    try { localStorage.setItem('theme', t) } catch (e) {}
+    apply(t)
+  })
+})()
+</script>
+
+<script src="assets/nav-panel.js?v=3" defer></script>
+
+</body>
+
+</html>

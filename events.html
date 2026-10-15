@@ -42,7 +42,7 @@ try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark'
         </li>
       <li><a href="index.html"><span class="idx">01</span><span class="label">Home</span></a></li>
       <li><a href="index.html#publications"><span class="idx">02</span><span class="label">Publications</span></a></li>
-      <li><a href="index.html#projects"><span class="idx">03</span><span class="label">Projects</span></a></li>
+      <li><a href="projects.html"><span class="idx">03</span><span class="label">Projects</span></a></li>
       <li><a href="presentations.html"><span class="idx">04</span><span class="label">Presentations</span></a></li>
       <li><a href="events.html" aria-current="page"><span class="idx">05</span><span class="label">Events</span></a></li>
       <li><a class="ext" href="https://mercury-hpg.github.io/"><span class="idx"></span><span class="label">Lab</span></a></li>
@@ -64,27 +64,6 @@ try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark'
     <section class="section">
       <div class="wrap">
         <ul class="cards">
-
-          <li class="card">
-            <div class="card-thumb">
-              <img src="assets/img/event-icmla.jpg" alt="Oakland University campus, the ICMLA '26 venue" width="1024"
-                height="576" loading="lazy" decoding="async">
-              <p class="meta on-cover">In conj. with <strong>ICMLA '26</strong> · Rochester, Michigan, USA</p>
-              <button type="button" class="cta on-cover" data-seal-id="icmla-phd" data-expires="2026-10-08T08:00:00-04:00" hidden>Forum Doc</button>
-              <span class="links quiet on-cover"><a href="https://www.icmla-conference.org/icmla26/">Website</a></span>
-            </div>
-            <div class="card-body">
-              <div class="card-head">
-                <h3>ICMLA PhD Forum <span class="when">· Oct. 7, 2026 (Wednesday)</span></h3>
-              </div>
-              <p class="subtitle">Doctoral Symposium and Industry Meet-Up at ICMLA '26, Oakland University. 15:20–17:00, Ballroom C East.</p>
-              <form class="unseal" hidden>
-                <input type="password" name="pass" autocomplete="current-password" placeholder="Passphrase" aria-label="Passphrase for the forum document" required>
-                <button type="submit">Open</button>
-                <span class="unseal-msg" role="status"></span>
-              </form>
-            </div>
-          </li>
 
           <li class="card">
             <div class="card-thumb">
@@ -113,6 +92,27 @@ try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark'
                 <h3>ECHO <span class="when">· Nov. 20, 2026 (Friday)</span></h3>
               </div>
               <p class="subtitle">The 1st International Workshop on Edge-Cloud-HPC Operational Continuum.</p>
+            </div>
+          </li>
+
+          <li class="card">
+            <div class="card-thumb">
+              <img src="assets/img/event-icmla.jpg" alt="Oakland University campus, the ICMLA '26 venue" width="1024"
+                height="576" loading="lazy" decoding="async">
+              <p class="meta on-cover">In conj. with <strong>ICMLA '26</strong> · Rochester, Michigan, USA</p>
+              <button type="button" class="cta on-cover" data-seal-id="icmla-phd" data-expires="2026-10-08T08:00:00-04:00" hidden>Forum Doc</button>
+              <span class="links quiet on-cover"><a href="https://www.icmla-conference.org/icmla26/">Website (archive)</a></span>
+            </div>
+            <div class="card-body">
+              <div class="card-head">
+                <h3>ICMLA PhD Forum <span class="when">· Oct. 7, 2026 (Wednesday)</span></h3>
+              </div>
+              <p class="subtitle">Doctoral Symposium and Industry Meet-Up at ICMLA '26, Oakland University. 15:20–17:00, Ballroom C East.</p>
+              <form class="unseal" hidden>
+                <input type="password" name="pass" autocomplete="current-password" placeholder="Passphrase" aria-label="Passphrase for the forum document" required>
+                <button type="submit">Open</button>
+                <span class="unseal-msg" role="status"></span>
+              </form>
             </div>
           </li>
 
@@ -230,6 +230,8 @@ try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark'
   }
 })()
 </script>
+
+<script src="assets/nav-panel.js?v=3" defer></script>
 
 </body>
 
